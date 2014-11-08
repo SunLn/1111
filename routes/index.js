@@ -19,6 +19,7 @@ router.post('/gaoji', function(req, res, next) {
 
     var jiyouA = req.param('jiyou-a');
     var jiyouB = req.param('jiyou-b');
+    console.log('jiyouA', jiyouA);
     if (jiyouA == '' || jiyouB == '') {
         res.json({
             error: 'invailed args'
