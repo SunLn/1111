@@ -3,7 +3,9 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
+    res.render('index', {
+        title: '双十一搞基不寂寞'
+    });
 });
 
 module.exports = router;
