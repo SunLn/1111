@@ -1,6 +1,6 @@
 var express = require('express');
 var config = require('./config');
-// var qiniu = require('qiniu');
+var qiniu = require('qiniu');
 // var http = require('http');
 
 var router = express.Router();
