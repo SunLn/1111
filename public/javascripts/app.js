@@ -10,9 +10,10 @@ angular.module('myApp.controllers', []).controller('FinanceController', function
     $scope.data = {
         'jiyouA': '',
         'jiyouB': '',
-        'imageLink': '',
+        'imageLink': 'http://gaoji1111.qiniudn.com/origin/01.jpeg',
         'status': ''
     }
+
     $scope.submit = function() {
         var responsePromise = $http.post("/gaoji", {
             'jiyou-a': $scope.data.jiyouA,
@@ -21,7 +22,7 @@ angular.module('myApp.controllers', []).controller('FinanceController', function
 
         responsePromise.success(function(data, status, headers, config) {
             $scope.data.status = data.status;
-            $scope.data.imgLink = data.imgLink;
+            $scope.data.imageLink = data.imageLink;
         });
         responsePromise.error(function(data, status, headers, config) {
             alert("AJAX failed!");

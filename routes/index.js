@@ -34,9 +34,9 @@ router.post('/gaoji', function(req, res, next) {
 
     var key = generateKey(link, order);
     var newEntryURI = config.Bucket_Name + ':' + key;
-    console.log(newEntryURI)
+    // console.log(newEntryURI)
     fullLink = fullLink + '|saveas/' + qiniu.util.urlsafeBase64Encode(newEntryURI);
-    console.log(fullLink);
+    // console.log(fullLink);
 
     // 在图片中随机选择一张图
     // 种下cookie，下一次根据cookie排除这张已经生成的图
@@ -47,7 +47,7 @@ router.post('/gaoji', function(req, res, next) {
     var sign = qiniu.util.hmacSha1(fullLink, config.SECRET_KEY)
     var signUrl = 'http://' + fullLink + '/sign/' + config.ACCESS_KEY + ':' + qiniu.util.base64ToUrlSafe(sign);
 
-    console.log(signUrl);
+    // console.log(signUrl);
     var outer_res = res;
 
     http.get(signUrl, function(res) {
@@ -56,7 +56,7 @@ router.post('/gaoji', function(req, res, next) {
             console.log(config.Domain + '/' + key)
             outer_res.json({
                 status: 'ok',
-                imgLink: config.Domain + '/' + key
+                imageLink: config.Domain + '/' + key
             });
         } else {
             outer_res.json({

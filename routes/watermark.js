@@ -5,22 +5,23 @@ var watermark = {};
 watermark.getLink1 = function(link, jiyouA, jiyouB) {
     jiyouA = utils.sliceName(jiyouA);
     jiyouB = utils.sliceName(jiyouB);
-
     var defaultColor = 'black',
         defaultSize = 500,
         defaultFont = '微软雅黑';
-
     var jiyouAArr = jiyouA.split('');
     var jiyouBArr = jiyouB.split('');
 
     var watermarkA = '',
         watermarkB = '';
     //text, font, fontsize, fill, dissolve, gravity, dx, dy
-    var watermarkA0 = watermark.fill(jiyouAArr[0], defaultFont, defaultSize, defaultColor, 100, 'NorthEast', 100, 100),
-        watermarkA1 = watermark.fill(jiyouAArr[1], defaultFont, defaultSize, defaultColor, 100, 'NorthEast', 100, 100),
-        watermarkB0 = watermark.fill(jiyouBArr[0], defaultFont, defaultSize, defaultColor, 100, 'NorthEast', 100, 100),
-        watermarkB1 = watermark.fill(jiyouBArr[1], defaultFont, defaultSize, defaultColor, 100, 'NorthEast', 100, 100);
-
+    var watermarkA0 = watermark.fill(jiyouAArr[0], defaultFont, defaultSize, defaultColor, 100, 'NorthWest', 40, 80),
+        watermarkA1 = watermark.fill(jiyouAArr[1], defaultFont, defaultSize, defaultColor, 100, 'NorthWest', 40, 120),
+        watermarkB0 = watermark.fill(jiyouBArr[0], defaultFont, 600, defaultColor, 100, 'NorthEast', 45, 60),
+        watermarkB1 = watermark.fill(jiyouBArr[1], defaultFont, defaultSize, defaultColor, 100, 'NorthEast', 45, 100);
+    // console.log(watermarkA0)
+    // console.log(watermarkA1)
+    // console.log(watermarkB0)
+    // console.log(watermarkB1)
     return link + '?' + watermarkA0 + '|' + watermarkA1 + '|' + watermarkB0 + '|' + watermarkB1;
 }
 
@@ -37,7 +38,7 @@ watermark.fill = function(text, font, fontsize, fill, dissolve, gravity, dx, dy)
         watermark += '/font/' + safe64(font);
     }
     if (fontsize) {
-        watermark += '/fontsize' + fontsize;
+        watermark += '/fontsize/' + fontsize;
     }
     if (fill) {
         watermark += '/fill/' + safe64(fill);
