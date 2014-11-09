@@ -6,8 +6,14 @@ var http = require('http');
 
 var router = express.Router();
 
-qiniu.conf.ACCESS_KEY = config.ACCESS_KEY;
-qiniu.conf.SECRET_KEY = config.SECRET_KEY;
+var AK = process.env.ACCESS_KEY || config.ACCESS_KEY;
+var SK = process.env.SECRET_KEY || config.SECRET_KEY;
+var Domain = process.env.Domain || config.Domain;
+var Bucket_Name = process.env.Bucket_Name || config.Bucket_Name;
+
+
+qiniu.conf.ACCESS_KEY = AK;
+qiniu.conf.SECRET_KEY = SK;
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -33,7 +39,7 @@ router.post('/gaoji', function(req, res, next) {
     var fullLink = getFullLink(link, order, jiyouA, jiyouB);
 
     var key = generateKey(link, order);
-    var newEntryURI = config.Bucket_Name + ':' + key;
+    var newEntryURI = Bucket_Name + ':' + key;
     // console.log(newEntryURI)
     fullLink = fullLink + '|saveas/' + qiniu.util.urlsafeBase64Encode(newEntryURI);
     // console.log(fullLink);
@@ -44,8 +50,8 @@ router.post('/gaoji', function(req, res, next) {
     // 根据图片需要控制文字对应的位置、文字数量
     // 生成唯一的文件名
 
-    var sign = qiniu.util.hmacSha1(fullLink, config.SECRET_KEY)
-    var signUrl = 'http://' + fullLink + '/sign/' + config.ACCESS_KEY + ':' + qiniu.util.base64ToUrlSafe(sign);
+    var sign = qiniu.util.hmacSha1(fullLink, SK)
+    var signUrl = 'http://' + fullLink + '/sign/' + AK + ':' + qiniu.util.base64ToUrlSafe(sign);
 
     // console.log(signUrl);
     var outer_res = res;
@@ -53,10 +59,10 @@ router.post('/gaoji', function(req, res, next) {
     http.get(signUrl, function(res) {
         console.log("Got response: " + res.statusCode);
         if (res.statusCode == 200) {
-            console.log(config.Domain + '/' + key)
+            console.log(Domain + '/' + key)
             outer_res.json({
                 status: 'ok',
-                imageLink: config.Domain + '/' + key
+                imageLink: Domain + '/' + key
             });
         } else {
             outer_res.json({
