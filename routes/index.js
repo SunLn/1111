@@ -1,5 +1,6 @@
 var express = require('express');
 var config = require('./config');
+var watermark = require('./watermark');
 var qiniu = require('qiniu');
 var http = require('http');
 
@@ -19,53 +20,24 @@ router.post('/gaoji', function(req, res, next) {
 
     var jiyouA = req.param('jiyou-a');
     var jiyouB = req.param('jiyou-b');
-    if (jiyouA == '' || jiyouB == '') {
+    if (!jiyouA || !jiyouB) {
         res.json({
             error: 'invailed args'
         });
     }
 
-
-    jiyouA = qiniu.util.urlsafeBase64Encode(jiyouA);
-    jiyouB = qiniu.util.urlsafeBase64Encode(jiyouB);
-
-    var getOriginLink = function() {
-        return {
-            link: 'gaoji1111.qiniudn.com/origin/01.jpeg',
-            order: 1
-        }
-    };
-    var originInfo = getOriginLink();
+    var originInfo = getRandomImage();
     var order = originInfo.order;
     var link = originInfo.link;
 
-    var watermarkA = '',
-        watermarkB = '',
-        fullLink = '';
-
-
-    switch (order) {
-        case 1:
-            watermarkA = 'watermark/2/text/' + jiyouA + '/font/5a6L5L2T/fontsize/500/fill/I0VGRUZFRg==/dissolve/100/gravity/SouthEast/dx/10/dy/10';
-            watermarkB = 'watermark/2/text/' + jiyouB + '/font/5a6L5L2T/fontsize/500/fill/I0VGRUZFRg==/dissolve/100/gravity/NorthEast/dx/10/dy/10';
-            fullLink = link + '?' + watermarkA + '|' + watermarkB;
-
-            break;
-        case 2:
-            break;
-        default:
-            break;
-    }
+    var fullLink = getFullLink(link, order, jiyouA, jiyouB);
 
     var key = generateKey(link, order);
     var newEntryURI = config.Bucket_Name + ':' + key;
     console.log(newEntryURI)
     fullLink = fullLink + '|saveas/' + qiniu.util.urlsafeBase64Encode(newEntryURI);
     console.log(fullLink);
-    // res.json({
-    //     status: 'ok',
-    //     imgLink: fullLink
-    // });
+
     // 在图片中随机选择一张图
     // 种下cookie，下一次根据cookie排除这张已经生成的图
     // 若cookie 已满，再随机生成图片
@@ -81,6 +53,7 @@ router.post('/gaoji', function(req, res, next) {
     http.get(signUrl, function(res) {
         console.log("Got response: " + res.statusCode);
         if (res.statusCode == 200) {
+            console.log(config.Domain + '/' + key)
             outer_res.json({
                 status: 'ok',
                 imgLink: config.Domain + '/' + key
@@ -110,6 +83,28 @@ function generateKey(link, order) {
     }
     result = order + '/' + result + new Date().getTime() + '.' + fileType;
     return result;
-};
+}
+
+function getRandomImage() {
+    return {
+        link: 'gaoji1111.qiniudn.com/origin/01.jpeg',
+        order: 1
+    }
+}
+
+function getFullLink(link, order, jiyouA, jiyouB) {
+    var fullLink = '';
+
+    switch (order) {
+        case 1:
+            fullLink = watermark.getLink1(link, jiyouA, jiyouB);
+            break;
+        case 2:
+            break;
+        default:
+            break;
+    }
+    return fullLink;
+}
 
 module.exports = router;
