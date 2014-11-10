@@ -14,8 +14,8 @@ watermark.getLink1 = function(link, jiyouA, jiyouB) {
     var watermarkA = '',
         watermarkB = '';
     //text, font, fontsize, fill, dissolve, gravity, dx, dy
-    var watermarkA0 = watermark.fill(jiyouAArr[0], defaultFont, 300, defaultColor, 100, 'NorthWest', 22, 43),
-        watermarkA1 = watermark.fill(jiyouAArr[1], defaultFont, 300, defaultColor, 100, 'NorthWest', 22, 70),
+    var watermarkA0 = watermark.fill(jiyouAArr[0], defaultFont, 300, defaultColor, 100, 'NorthWest', 22, 33),
+        watermarkA1 = watermark.fill(jiyouAArr[1], defaultFont, 300, defaultColor, 100, 'NorthWest', 22, 60),
         watermarkB0 = watermark.fill(jiyouBArr[0], defaultFont, defaultSize, defaultColor, 100, 'NorthEast', 33, 30),
         watermarkB1 = watermark.fill(jiyouBArr[1], defaultFont, defaultSize, defaultColor, 100, 'NorthEast', 33, 65);
     // console.log(watermarkA0)

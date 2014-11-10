@@ -5,6 +5,9 @@ block content
         div.row
             div.col-md-4.col-xs-12.col-md-offset-4
                 h1= title
+                    small
+                        a.fork(href='https://github.com/SunLn/1111',target="_blank") Fork
+
                 form.bs-example.bs-example-form(role="form",_lpchecked="1")
                     div.input-group.input-group
                         span.input-group-addon 基佬
@@ -23,6 +26,12 @@ block content
                     a.jiathis_button_tsina 新浪微博
                     a.jiathis.jiathis_txt.jiathis_separator.jtico.jtico_jiathis(target="_blank") 更多
                     a.jiathis_counter_style
+
+                footer
+                    strong 致谢：
+                        a.link(target="_blank",href="http://qiniu.com") 七牛云存储
+                        a.link.inline-block(target="_blank",href="http://coding.net") coding
+
     script(src='http://cdn.staticfile.org/angular.js/1.2.20/angular.min.js')
     script(src='/javascripts/app.js')
 

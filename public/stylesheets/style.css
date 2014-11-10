@@ -1,6 +1,10 @@
 .shuang11 h1 {
     margin-bottom: 30px;
 }
+.shuang11 h1 small{
+    margin-left: 20px;
+    font-size: 15px;
+}
 .shuang11 .input-group{
     margin-bottom: 20px;
 }
@@ -16,4 +20,7 @@
 }
 #ckepop {
     padding: 0 0 30px;
+}
+footer a {
+    padding:5px 20px 5px 0;
 }
