@@ -4,6 +4,7 @@ var watermark = require('./watermark');
 var qiniu = require('qiniu');
 var http = require('http');
 
+
 var router = express.Router();
 
 var AK = process.env.ACCESS_KEY || config.ACCESS_KEY;
@@ -14,6 +15,8 @@ var Bucket_Name = process.env.Bucket_Name || config.Bucket_Name;
 
 qiniu.conf.ACCESS_KEY = AK;
 qiniu.conf.SECRET_KEY = SK;
+
+
 
 /* GET home page. */
 router.get('/', function(req, res) {
