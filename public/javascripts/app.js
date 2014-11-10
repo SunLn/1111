@@ -10,7 +10,8 @@ angular.module('myApp.controllers', []).controller('FinanceController', function
     $scope.data = {
         'jiyouA': '',
         'jiyouB': '',
-        'imageLink': 'http://gaoji1111.qiniudn.com/origin/01.jpeg',
+        // 'imageLink': 'http://gaoji1111.qiniudn.com/origin/01.jpg',
+        'imageLink': 'http://gaoji1111.qiniudn.com/origin/runtu.jpg',
         'status': ''
     }
 

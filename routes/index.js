@@ -53,13 +53,13 @@ router.post('/gaoji', function(req, res, next) {
     var sign = qiniu.util.hmacSha1(fullLink, SK)
     var signUrl = 'http://' + fullLink + '/sign/' + AK + ':' + qiniu.util.base64ToUrlSafe(sign);
 
-    // console.log(signUrl);
+    console.log(signUrl);
     var outer_res = res;
 
     http.get(signUrl, function(res) {
         console.log("Got response: " + res.statusCode);
         if (res.statusCode == 200) {
-            console.log(Domain + '/' + key)
+            // console.log(Domain + '/' + key)
             outer_res.json({
                 status: 'ok',
                 imageLink: Domain + '/' + key
@@ -93,7 +93,8 @@ function generateKey(link, order) {
 
 function getRandomImage() {
     return {
-        link: 'gaoji1111.qiniudn.com/origin/01.jpeg',
+        // link: 'gaoji1111.qiniudn.com/origin/01.jpg',
+        link: 'gaoji1111.qiniudn.com/origin/runtu.jpg',
         order: 1
     }
 }
