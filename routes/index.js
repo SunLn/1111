@@ -56,11 +56,9 @@ router.post('/gaoji', function(req, res, next) {
     var sign = qiniu.util.hmacSha1(fullLink, SK)
     var signUrl = 'http://' + fullLink + '/sign/' + AK + ':' + qiniu.util.base64ToUrlSafe(sign);
 
-    console.log(signUrl);
     var outer_res = res;
 
     http.get(signUrl, function(res) {
-        console.log("Got response: " + res.statusCode);
         if (res.statusCode == 200) {
             // console.log(Domain + '/' + key)
             outer_res.json({
@@ -74,9 +72,8 @@ router.post('/gaoji', function(req, res, next) {
         }
     }).on('error', function(e) {
         outer_res.json({
-            ok: 'not ok'
+            ok: e.message
         });
-        console.log("Got error: " + e.message);
     });
 
 });
