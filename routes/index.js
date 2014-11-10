@@ -29,10 +29,11 @@ router.post('/gaoji', function(req, res, next) {
 
     var jiyouA = req.param('jiyou-a');
     var jiyouB = req.param('jiyou-b');
-    if (!jiyouA || !jiyouB) {
+    if (jiyouB.length < 2 || jiyouA.length < 2) {
         res.json({
             error: 'invailed args'
         });
+        return false;
     }
 
     var originInfo = getRandomImage();
