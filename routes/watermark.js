@@ -18,11 +18,26 @@ watermark.getLink1 = function(link, jiyouA, jiyouB) {
         watermarkA1 = watermark.fill(jiyouAArr[1], defaultFont, 300, defaultColor, 100, 'NorthWest', 22, 65),
         watermarkB0 = watermark.fill(jiyouBArr[0], defaultFont, defaultSize, defaultColor, 100, 'NorthEast', 33, 30),
         watermarkB1 = watermark.fill(jiyouBArr[1], defaultFont, defaultSize, defaultColor, 100, 'NorthEast', 33, 65);
-    // console.log(watermarkA0)
-    // console.log(watermarkA1)
-    // console.log(watermarkB0)
-    // console.log(watermarkB1)
+
     return link + '?' + watermarkA0 + '|' + watermarkA1 + '|' + watermarkB0 + '|' + watermarkB1;
+}
+
+watermark.getLink2 = function(link, jiyouA, jiyouB) {
+    jiyouA = utils.sliceName(jiyouA);
+    jiyouB = utils.sliceName(jiyouB);
+    var defaultColor = 'green',
+        defaultSize = 500,
+        defaultFont = '微软雅黑';
+
+
+    var watermarkA = '',
+        watermarkB = '';
+    //text, font, fontsize, fill, dissolve, gravity, dx, dy
+    var watermarkA = watermark.fill(jiyouA, defaultFont, 700, defaultColor, 100, 'NorthWest', 120, 261),
+        watermarkB = watermark.fill(jiyouB, defaultFont, 700, defaultColor, 100, 'NorthWest', 300, 300);
+    console.log(watermarkA)
+
+    return link + '?' + watermarkA + '|' + watermarkB;
 }
 
 

@@ -58,7 +58,7 @@ router.post('/gaoji', function(req, res, next) {
     var signUrl = 'http://' + fullLink + '/sign/' + AK + ':' + qiniu.util.base64ToUrlSafe(sign);
 
     var outer_res = res;
-
+    console.log(signUrl);
     http.get(signUrl, function(res) {
         if (res.statusCode == 200) {
             // console.log(Domain + '/' + key)
@@ -93,10 +93,13 @@ function generateKey(link, order) {
 }
 
 function getRandomImage() {
+    // return {
+    //     // link: 'gaoji1111.qiniudn.com/origin/runtu.jpg',
+    //     // order: 1
+    // }
     return {
-        // link: 'gaoji1111.qiniudn.com/origin/01.jpg',
-        link: 'gaoji1111.qiniudn.com/origin/runtu.jpg',
-        order: 1
+        link: 'gaoji1111.qiniudn.com/origin/yamaidie.jpg',
+        order: 2
     }
 }
 
@@ -108,6 +111,7 @@ function getFullLink(link, order, jiyouA, jiyouB) {
             fullLink = watermark.getLink1(link, jiyouA, jiyouB);
             break;
         case 2:
+            fullLink = watermark.getLink2(link, jiyouA, jiyouB);
             break;
         default:
             break;
