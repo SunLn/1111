@@ -97,9 +97,13 @@ function getRandomImage() {
     //     // link: 'gaoji1111.qiniudn.com/origin/runtu.jpg',
     //     // order: 1
     // }
+    // return {
+    //     link: 'gaoji1111.qiniudn.com/origin/yamaidie.jpg',
+    //     order: 2
+    // }
     return {
-        link: 'gaoji1111.qiniudn.com/origin/yamaidie.jpg',
-        order: 2
+        link: 'gaoji1111.qiniudn.com/origin/jj.jpg',
+        order: 3
     }
 }
 
@@ -112,6 +116,9 @@ function getFullLink(link, order, jiyouA, jiyouB) {
             break;
         case 2:
             fullLink = watermark.getLink2(link, jiyouA, jiyouB);
+            break;
+        case 3:
+            fullLink = watermark.getLink3(link, jiyouA, jiyouB);
             break;
         default:
             break;

@@ -40,6 +40,24 @@ watermark.getLink2 = function(link, jiyouA, jiyouB) {
     return link + '?' + watermarkA + '|' + watermarkB;
 }
 
+watermark.getLink3 = function(link, jiyouA, jiyouB) {
+    jiyouA = utils.sliceName(jiyouA);
+    jiyouB = utils.sliceName(jiyouB);
+    var defaultColor = 'black',
+        defaultSize = 500,
+        defaultFont = '宋体';
+
+
+    var watermarkA = '',
+        watermarkB = '';
+    //text, font, fontsize, fill, dissolve, gravity, dx, dy
+    var watermarkA = watermark.fill(jiyouA, defaultFont, 400, defaultColor, 100, 'NorthWest', 67, 12),
+        watermarkB = watermark.fill(jiyouB, defaultFont, 400, defaultColor, 100, 'NorthWest', 200, 225);
+    console.log(watermarkA)
+
+    return link + '?' + watermarkA + '|' + watermarkB;
+}
+
 
 watermark.fill = function(text, font, fontsize, fill, dissolve, gravity, dx, dy) {
     var watermark = 'watermark/2/text/',
